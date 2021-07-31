@@ -186,8 +186,25 @@ h2 {
   }
 }
 #countdown .countdown-lists {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
   margin-top: 3rem;
+}
+
+@media screen and (max-width: 780px) {
+  #countdown  .countdown-lists {
+    grid-template-columns: 1fr 1fr;
+    /* display: none; */
+    grid-gap: unset;
+  }
+  .heading{
+    padding: 0;
+    font-size: 3rem;
+    text-align: center;
+  }
+  .brithdayYear{
+    padding: 0;
+  }
 }
 </style>
