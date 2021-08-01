@@ -1,6 +1,7 @@
 <template>
   <div id="main-section">
-    <div id="countdown" class="countdown">
+     <loading v-if="loading"></loading>
+    <div id="countdown" class="countdown" v-if="countDownNone">
       <div class="countdown-items">
         <h1 class="heading">New Year Countdown</h1>
         <p class="brithdayYear">2022</p>
@@ -44,6 +45,7 @@
 </template>
 
 <script>
+import Loading from './components/Loading.vue'
 export default {
   data() {
     return {
@@ -51,7 +53,15 @@ export default {
       displayHours: 0,
       displayMinutes: 0,
       displaySeconds: 0,
+      countDownNone: false,
+      loading: true,
     };
+  },
+  created() {
+    setTimeout(() => {
+      this.countDownNone = true;
+      this.loading = false
+    }, 2000);
   },
   computed: {
     _secends() {
@@ -70,6 +80,7 @@ export default {
   mounted() {
     this.updateCountdown();
   },
+  
   methods: {
     //  Update countdown time
     updateCountdown() {
@@ -78,7 +89,6 @@ export default {
         const newYearTime = new Date(2022, 0, 1, 0, 0, 0, 0);
         // Set background year
         const diff = newYearTime.getTime() - currentYear.getTime();
-
         if (diff < 0) {
           return clearInterval(timer);
         }
@@ -94,6 +104,9 @@ export default {
       }, 1000);
     },
   },
+  components: {
+    Loading
+  }
 };
 </script>
 <style>
@@ -113,7 +126,6 @@ body {
   border-radius: 6px;
   text-align: center;
 }
-
 small {
   font-size: 29px;
   color: #5dabcd;
@@ -184,7 +196,7 @@ h2 {
   100% {
     background-position: 0 550px;
   }
-}
+} 
 #countdown .countdown-lists {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -193,17 +205,16 @@ h2 {
 }
 
 @media screen and (max-width: 780px) {
-  #countdown  .countdown-lists {
+  #countdown .countdown-lists {
     grid-template-columns: 1fr 1fr;
-    /* display: none; */
     grid-gap: unset;
   }
-  .heading{
+  .heading {
     padding: 0;
     font-size: 3rem;
     text-align: center;
   }
-  .brithdayYear{
+  .brithdayYear {
     padding: 0;
   }
 }
