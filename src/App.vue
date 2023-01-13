@@ -4,7 +4,7 @@
     <div id="countdown" class="countdown" v-if="countDownNone">
       <div class="countdown-items">
         <h1 class="heading">New Year Countdown</h1>
-        <p class="brithdayYear">2023</p>
+        <p class="brithdayYear">2024</p>
         <div class="countdown-lists">
           <div class="time">
             <div class="card">
