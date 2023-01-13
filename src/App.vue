@@ -86,7 +86,7 @@ export default {
     updateCountdown() {
       const timer = setInterval(() => {
         const currentYear = new Date();
-        const newYearTime = new Date(2023, 0, 1, 0, 0, 0, 0);
+        const newYearTime = new Date(2024, 0, 1, 0, 0, 0, 0);
         // Set background year
         const diff = newYearTime.getTime() - currentYear.getTime();
         if (diff < 0) {
