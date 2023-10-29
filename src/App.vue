@@ -4,7 +4,7 @@
     <div id="countdown" class="countdown" v-if="countDownNone">
       <div class="countdown-items">
         <h1 class="heading">New Year Countdown</h1>
-        <p class="brithdayYear">2024</p>
+        <p class="brithdayYear">{{ nextYear }}</p>
         <div class="countdown-lists">
           <div class="time">
             <div class="card">
@@ -53,6 +53,7 @@ export default {
       displayHours: 0,
       displayMinutes: 0,
       displaySeconds: 0,
+      nextYear: null,
       countDownNone: false,
       loading: true,
     };
@@ -86,13 +87,13 @@ export default {
     updateCountdown() {
       const timer = setInterval(() => {
         const currentYear = new Date();
-
         // Get the next new year's date
         const nextYear =
           currentYear.getFullYear() +
           (currentYear.getMonth() === 0 && currentYear.getDate() === 1 ? 0 : 1);
-        const newYearTime = new Date(nextYear, 0, 1, 0, 0, 0, 0);
 
+        this.nextYear = nextYear;
+        const newYearTime = new Date(nextYear, 0, 1, 0, 0, 0, 0);
         // Set background year
         const diff = newYearTime - currentYear;
         if (diff < 0) {
