@@ -1,6 +1,6 @@
 <template>
   <div id="main-section">
-     <loading v-if="loading"></loading>
+    <loading v-if="loading"></loading>
     <div id="countdown" class="countdown" v-if="countDownNone">
       <div class="countdown-items">
         <h1 class="heading">New Year Countdown</h1>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Loading from './components/Loading.vue'
+import Loading from "./components/Loading.vue";
 export default {
   data() {
     return {
@@ -60,7 +60,7 @@ export default {
   created() {
     setTimeout(() => {
       this.countDownNone = true;
-      this.loading = false
+      this.loading = false;
     }, 2000);
   },
   computed: {
@@ -80,15 +80,21 @@ export default {
   mounted() {
     this.updateCountdown();
   },
-  
+
   methods: {
     //  Update countdown time
     updateCountdown() {
       const timer = setInterval(() => {
         const currentYear = new Date();
-        const newYearTime = new Date(2024, 0, 1, 0, 0, 0, 0);
+
+        // Get the next new year's date
+        const nextYear =
+          currentYear.getFullYear() +
+          (currentYear.getMonth() === 0 && currentYear.getDate() === 1 ? 0 : 1);
+        const newYearTime = new Date(nextYear, 0, 1, 0, 0, 0, 0);
+
         // Set background year
-        const diff = newYearTime.getTime() - currentYear.getTime();
+        const diff = newYearTime - currentYear;
         if (diff < 0) {
           return clearInterval(timer);
         }
@@ -105,8 +111,8 @@ export default {
     },
   },
   components: {
-    Loading
-  }
+    Loading,
+  },
 };
 </script>
 <style>
@@ -196,7 +202,7 @@ h2 {
   100% {
     background-position: 0 550px;
   }
-} 
+}
 #countdown .countdown-lists {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
